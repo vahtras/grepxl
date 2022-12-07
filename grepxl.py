@@ -1,5 +1,7 @@
 import sys
 import pandas as pd
+from rich import print
+from rich_tools import df_to_table
 
 
 def grep(pattern, data):
@@ -19,7 +21,7 @@ def main():
     pattern, xl = sys.argv[1:]
     data = pd.read_excel(xl, engine='openpyxl')
     search = grep(pattern, data)
-    print(search)
+    print(df_to_table(search, show_index=False))
 
 
 if __name__ == "__main__":
