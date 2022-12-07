@@ -6,6 +6,11 @@ build-backend = "flit_core.buildapi"
 name = "grepxl"
 version = "1.0.0"
 description = 'Search fields in excel'
+dependencies = [
+    "openpyxl==3.0.10",
+    "pytest==7.2.0",
+    "rich-tools==0.5.0",
+]
 
 [project.scripts]
 grepxl = "grepxl:main"
