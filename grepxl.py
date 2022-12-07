@@ -1,4 +1,6 @@
 import sys
+import warnings
+
 import pandas as pd
 from rich import print
 from rich_tools import df_to_table
@@ -19,7 +21,9 @@ def grep(pattern, data):
 
 def main():
     pattern, xl = sys.argv[1:]
-    data = pd.read_excel(xl, engine='openpyxl')
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore', UserWarning)
+        data = pd.read_excel(xl, engine='openpyxl')
     search = grep(pattern, data)
     print(df_to_table(search, show_index=False))
 
