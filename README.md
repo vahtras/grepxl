@@ -5,7 +5,7 @@
 ## Installation
 
 ~~~
-$ pip install grepxl
+$ pipx install grepxl
 ~~~
 
 
