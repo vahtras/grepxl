@@ -1,5 +1,6 @@
 # grepxl
-* A simple search tool for excel spreadsheets *
+
+*A simple search tool for excel spreadsheets*
 
 ## Installation
 
@@ -12,7 +13,7 @@ $ pip install grepxl
 
 Given an excel file `data.xlsx`:
 
-<img src="mockdata.png">
+<img src="mockdata.png" width="50%">
 
 
 to print a row where any one cell matches a regex
