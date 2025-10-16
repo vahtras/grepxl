@@ -23,12 +23,15 @@ def main():
 def grep(pattern, data):
     mask = None
     for col in data.columns:
-        if data[col].dtype != object:
-            continue
-        if mask is None:
-            mask = data[col].str.contains(pattern)
+        if data[col].dtype == object:
+            update = data[col].str.contains(pattern)
         else:
-            mask = mask | data[col].str.contains(pattern)
+            update = data[col].astype(str).str.contains(pattern)
+        
+        if mask is None:
+            mask = update
+        else:
+            mask = mask | update
 
     return data[mask]
 
