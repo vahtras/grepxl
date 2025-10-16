@@ -1,11 +1,13 @@
 import sys
-import warnings
 
 import pandas as pd
 from rich import print
 from rich_tools import df_to_table
 
 def main():
+    """
+    Display rows of a dataframe from an Excel file that match a given pattern.
+    """
     try:
         pattern, xl = sys.argv[1:]
     except ValueError:
@@ -18,7 +20,10 @@ def main():
 
 
 
-def grep(pattern, data):
+def grep(pattern:str, data:pd.DataFrame) -> pd.DataFrame:
+    """
+    Filter rows in a DataFrame that contain the given pattern in any column.
+    """
     mask = None
     for col in data.columns:
         update = data[col].astype(str).str.contains(pattern)
