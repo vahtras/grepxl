@@ -11,9 +11,7 @@ def main():
     except ValueError:
         print("Usage: grepxl <pattern> <file>")
         sys.exit(1)
-    with warnings.catch_warnings():
-        warnings.simplefilter('ignore', UserWarning)
-        data = pd.read_excel(xl, engine='openpyxl').dropna(axis='columns', how='all')
+    data = pd.read_excel(xl, engine='calamine').dropna(axis='columns', how='all')
     search = grep(pattern, data)
     print(df_to_table(search, show_index=False))
 
