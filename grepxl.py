@@ -1,4 +1,5 @@
 import argparse
+from importlib.metadata import version
 
 import pandas as pd
 from rich import print
@@ -12,6 +13,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('pattern', help='Regular expression pattern to search for')
     parser.add_argument('excel', help='Excel file')
+    parser.add_argument('--version', action='version', version=version('grepxl'))
     args = parser.parse_args()
 
     pattern = args.pattern
