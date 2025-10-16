@@ -1,4 +1,4 @@
-import sys
+import argparse
 
 import pandas as pd
 from rich import print
@@ -8,16 +8,18 @@ def main():
     """
     Display rows of a dataframe from an Excel file that match a given pattern.
     """
-    try:
-        pattern, xl = sys.argv[1:]
-    except ValueError:
-        print("Usage: grepxl <pattern> <file>")
-        sys.exit(1)
-    data = pd.read_excel(xl, engine='calamine').dropna(axis='columns', how='all')
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('pattern', help='Regular expression pattern to search for')
+    parser.add_argument('excel', help='Excel file')
+    args = parser.parse_args()
+
+    pattern = args.pattern
+    excel = args.excel
+
+    data = pd.read_excel(excel, engine='calamine').dropna(axis='columns', how='all')
     search = grep(pattern, data)
     print(df_to_table(search, show_index=False))
-
-
 
 
 def grep(pattern:str, data:pd.DataFrame) -> pd.DataFrame:
