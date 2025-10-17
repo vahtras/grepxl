@@ -5,7 +5,7 @@
 ## Installation
 
 ~~~
-$ pipx install grepxl
+$ uv tool install grepxl
 ~~~
 
 
@@ -13,7 +13,7 @@ $ pipx install grepxl
 
 Given an excel file `data.xlsx`:
 
-<img src="mockdata.png" width="50%">
+<img src="img/mockdata.png" width="50%">
 
 
 to print a row where any one cell matches a regex
