@@ -1,5 +1,6 @@
 import argparse
 from importlib.metadata import version
+import functools
 
 import pandas as pd
 from rich import print
@@ -20,6 +21,7 @@ def main():
     excel = args.excel
 
     data = pd.read_excel(excel, engine='calamine').dropna(axis='columns', how='all')
+
     search = grep(pattern, data)
     print(df_to_table(search, show_index=False))
 
@@ -28,15 +30,11 @@ def grep(pattern:str, data:pd.DataFrame) -> pd.DataFrame:
     """
     Filter rows in a DataFrame that contain the given pattern in any column.
     """
-    mask = None
-    for col in data.columns:
-        update = data[col].astype(str).str.contains(pattern)
-        
-        if mask is None:
-            mask = update
-        else:
-            mask = mask | update
 
+    mask = functools.reduce(
+        lambda x, y: x | y,
+        (data[col].astype(str).str.contains(pattern) for col in data.columns)
+    )
     return data[mask]
 
 
