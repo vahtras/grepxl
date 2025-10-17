@@ -1,6 +1,6 @@
 # grepxl
 
-*A simple search tool for excel spreadsheets*
+*A simple command-line search tool for excel spreadsheets*
 
 ## Installation
 
