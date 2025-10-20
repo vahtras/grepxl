@@ -19,7 +19,7 @@ Given an excel file `data.xlsx`:
 to print a row where any one cell matches a regex
 
 ~~~
-$ grepxl '.*' data/MOCKDATA.xlsx
+$ grepxl '.*' MOCKDATA.xlsx
 ┏━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ id ┃ first_name ┃ last_name  ┃ email                      ┃
 ┡━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -34,7 +34,7 @@ $ grepxl '.*' data/MOCKDATA.xlsx
 │ 9  │ Nanci      │ Ledrane    │ nledrane8@devhub.com       │
 │ 10 │ Agustin    │ Cattermoul │ acattermoul9@google.com.au │
 └────┴────────────┴────────────┴────────────────────────────┘
-$ grepxl 'gov$' data/MOCKDATA.xlsx
+$ grepxl 'gov$' MOCKDATA.xlsx
 ┏━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┓
 ┃ id ┃ first_name ┃ last_name ┃ email              ┃
 ┡━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━┩
@@ -42,7 +42,7 @@ $ grepxl 'gov$' data/MOCKDATA.xlsx
 │ 2  │ Liana      │ Mustoe    │ lmustoe1@nps.gov   │
 │ 5  │ Albina     │ Kibble    │ akibble4@house.gov │
 └────┴────────────┴───────────┴────────────────────┘
-$ grepxl '^Le' data/MOCKDATA.xlsx
+$ grepxl '^Le' MOCKDATA.xlsx
 ┏━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ id ┃ first_name ┃ last_name ┃ email                  ┃
 ┡━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
