@@ -17,7 +17,6 @@ def main():
     parser.add_argument('--columns', nargs='*')
     parser.add_argument('--version', action='version', version=version('grepxl'))
     args = parser.parse_args()
-    print(args)
 
     pattern = args.pattern
     excel = args.excel
