@@ -15,6 +15,7 @@ def main():
     parser.add_argument('pattern', help='Regular expression pattern to search for')
     parser.add_argument('excel', help='Excel file')
     parser.add_argument('--columns', nargs='*')
+    parser.add_argument('--sort', nargs='*')
     parser.add_argument('--version', action='version', version=version('grepxl'))
     args = parser.parse_args()
 
@@ -24,6 +25,10 @@ def main():
     data = pd.read_excel(excel, engine='calamine').dropna(axis='columns', how='all')
 
     search = grep(pattern, data)
+
+    if args.sort:
+        search = search.sort_values(by=args.sort)
+
     if args.columns:
         search = search.loc[:, args.columns]
     print(df_to_table(search, show_index=False))
