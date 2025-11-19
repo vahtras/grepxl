@@ -30,7 +30,12 @@ def main():
         search = search.sort_values(by=args.sort)
 
     if args.columns:
-        search = search.loc[:, args.columns]
+        try:
+            search = search.loc[:, args.columns]
+        except KeyError as e:
+            print(f"[red]Error:[/red] {e}")
+            print(df_to_table(data.head(0), show_index=False))
+            return
     print(df_to_table(search, show_index=False))
 
 
