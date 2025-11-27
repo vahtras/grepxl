@@ -16,6 +16,7 @@ def main():
     parser.add_argument('excel', help='Excel file')
     parser.add_argument('--columns', nargs='*')
     parser.add_argument('--sort', nargs='*')
+    parser.add_argument('-i', '--ignore-case', action='store_true', help='Ignore case distinctions')
     parser.add_argument('--version', action='version', version=version('grepxl'))
     args = parser.parse_args()
 
@@ -23,6 +24,9 @@ def main():
     excel = args.excel
 
     data = pd.read_excel(excel, engine='calamine').dropna(axis='columns', how='all')
+
+    if args.ignore_case:
+        pattern = '(?i)' + pattern
 
     search = grep(pattern, data)
 
