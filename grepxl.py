@@ -13,7 +13,7 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('pattern', help='Regular expression pattern to search for')
-    parser.add_argument('excel', help='Excel file')
+    parser.add_argument('excels', nargs='+', help='Excel file')
     parser.add_argument('--columns', nargs='*')
     parser.add_argument('--sort', nargs='*')
     parser.add_argument('--tab', type=int, default=0)
@@ -22,26 +22,30 @@ def main():
     args = parser.parse_args()
 
     pattern = args.pattern
-    excel = args.excel
+    excels = args.excels
 
-    data = pd.read_excel(excel, sheet_name=args.tab, engine='calamine').dropna(axis='columns', how='all')
+    dati = [
+        pd.read_excel(excel, sheet_name=args.tab, engine='calamine').dropna(axis='columns', how='all')
+        for excel in excels
+    ]
 
     if args.ignore_case:
         pattern = '(?i)' + pattern
 
-    search = grep(pattern, data)
+    for data in dati:
+        search = grep(pattern, data)
 
-    if args.sort:
-        search = search.sort_values(by=args.sort)
+        if args.sort:
+            search = search.sort_values(by=args.sort)
 
-    if args.columns:
-        try:
-            search = search.loc[:, args.columns]
-        except KeyError as e:
-            print(f"[red]Error:[/red] {e}")
-            print(df_to_table(data.head(0), show_index=False))
-            return
-    print(df_to_table(search, show_index=False))
+        if args.columns:
+            try:
+                search = search.loc[:, args.columns]
+            except KeyError as e:
+                print(f"[red]Error:[/red] {e}")
+                print(df_to_table(data.head(0), show_index=False))
+                return
+        print(df_to_table(search, show_index=False))
 
 
 def grep(pattern:str, data:pd.DataFrame) -> pd.DataFrame:
